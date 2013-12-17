@@ -7,7 +7,7 @@ use Coro;
 use Coro::Semaphore;
 use POSIX qw(floor);
 
-our $VERSION = 1.0;
+our $VERSION = 1.1;
 
 sub new {
     my ($class, $max) = @_;
@@ -32,7 +32,7 @@ sub count       { $_[0]->[1] }
 sub max         { $_[0]->[2] }
 sub is_empty    { $_[0]->count == 0 }
 sub is_full     { $_[0]->count >= $_[0]->max }
-sub peek        { $_[0]->[0][$_[1] // 0] }
+sub peek        { $_[0]->[0][$_[1]] }
 sub is_shutdown { $_[0]->[5] };
 
 sub slots_up    { Coro::Semaphore::up   $_[0]->[3] }
